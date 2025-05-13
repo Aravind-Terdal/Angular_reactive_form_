@@ -73,6 +73,7 @@ export class ReactiveFormComponent implements OnInit {
     if (this.signUpForm.valid) {
       console.log(this.signUpForm.value);
     }
+    this.signUpForm.reset();
   }
   // this function handles weather the add is same or not
   isAddSameHandler() {
