@@ -1,0 +1,426 @@
+<div class="row my-4">
+  <div class="col-md-8 offset-md-2">
+    <h1 class="text-center text-info"><strong>Reactive Form</strong></h1>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+      <div class="form-group">
+        <label for="username"><strong>User Name</strong></label>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          formControlName="username"
+        />
+        <strong
+          *ngIf="
+            formControls['username'].touched &&
+            formControls['username'].hasError('required')
+          "
+          class="text-danger"
+          >User Name is required field</strong
+        >
+        <strong
+          *ngIf="formControls['username'].hasError('noSpace')"
+          class="text-danger"
+          >No space is allowed</strong
+        >
+        <strong
+          class="text-danger"
+          *ngIf="
+            formControls['username'].dirty &&
+            formControls['username'].hasError('maxlength')
+          "
+        >
+          max length is 16
+        </strong>
+      </div>
+
+      <div class="form-group">
+        <label for="email"><strong>Email</strong></label>
+        <input
+          type="text"
+          id="email"
+          class="form-control"
+          formControlName="email"
+        />
+        <strong
+          *ngIf="
+            formControls['email'].touched &&
+            formControls['email'].hasError('required')
+          "
+          class="text-danger"
+          >Email is required field</strong
+        >
+        <strong
+          *ngIf="
+            formControls['email'].dirty &&
+            formControls['email'].hasError('pattern')
+          "
+          class="text-danger"
+          >Email is invalid</strong
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="empID"><strong>Emp ID</strong></label>
+        <input
+          type="text"
+          class="form-control"
+          id="empID"
+          formControlName="empID"
+        />
+        <strong
+          *ngIf="
+            formControls['empID'].touched &&
+            formControls['empID'].hasError('required')
+          "
+          class="text-danger"
+        >
+          Emp Id is required field
+        </strong>
+
+        <strong
+          *ngIf="
+            formControls['empID'].dirty &&
+            formControls['empID'].hasError('invalidEmpId')
+          "
+          class="text-danger"
+        >
+          {{formControls['empID'].errors?.['invalidEmpId']}}
+        </strong>
+      </div>
+
+      <div class="form-group">
+        <label
+          [for]="gender"
+          *ngFor="let gender of RadioButtonArray"
+          class="mr-2"
+        >
+          <input
+            type="radio"
+            [id]="gender"
+            formControlName="gender"
+            [value]="gender"
+          />
+          <strong> {{ gender | titlecase }}</strong>
+        </label>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6" formGroupName="currentAddress">
+          <h5><strong>Current Address</strong></h5>
+          <div class="form-group">
+            <label for="caCountry"><strong>Country</strong></label>
+            <select
+              id="caCountry"
+              formControlName="country"
+              class="form-control"
+            >
+              <option
+                [value]="country.Country"
+                *ngFor="let country of countryData"
+              >
+                {{ country.Country }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="state"><strong>state</strong></label>
+            <input
+              type="text"
+              id="caCountry"
+              formControlName="state"
+              class="form-control"
+            />
+            <strong
+              class="text-danger"
+              *ngIf="
+                formControls['currentAddress'].get('state')?.touched &&
+                formControls['currentAddress']
+                  .get('state')
+                  ?.hasError('required')
+              "
+              >state is required field</strong
+            >
+          </div>
+          <div class="form-group">
+            <label for="city"><strong>City</strong></label>
+            <input
+              type="text"
+              id="caCountry"
+              formControlName="city"
+              class="form-control"
+            />
+            <strong
+              class="text-danger"
+              *ngIf="
+                formControls['currentAddress'].get('city')?.touched &&
+                formControls['currentAddress'].get('city')?.hasError('required')
+              "
+              >city is required field</strong
+            >
+          </div>
+          <div class="form-group">
+            <label for="pincode"><strong>Pincode</strong></label>
+            <input
+              type="text"
+              id="caCountry"
+              formControlName="pincode"
+              class="form-control"
+            />
+            <strong
+              class="text-danger"
+              *ngIf="
+                formControls['currentAddress'].get('pincode')?.touched &&
+                formControls['currentAddress']
+                  .get('pincode')
+                  ?.hasError('required')
+              "
+              >pincode is required field</strong
+            >
+          </div>
+        </div>
+
+        <div class="col-md-6" formGroupName="permanentAddress">
+          <h5><strong>Permanent Address</strong></h5>
+          <div class="form-group">
+            <label for="paCountry"><strong>Country</strong></label>
+            <select
+              id="paCountry"
+              formControlName="country"
+              class="form-control"
+            >
+              <option
+                [value]="country.Country"
+                *ngFor="let country of countryData"
+              >
+                {{ country.Country }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="state"><strong>state</strong></label>
+            <input
+              type="text"
+              id="paCountry"
+              formControlName="state"
+              class="form-control"
+            />
+            <strong
+              class="text-danger"
+              *ngIf="
+                formControls['permanentAddress'].get('state')?.touched &&
+                formControls['currentAddress']
+                  .get('state')
+                  ?.hasError('required')
+              "
+              >state is required field</strong
+            >
+          </div>
+          <div class="form-group">
+            <label for="city"><strong>City</strong></label>
+            <input
+              type="text"
+              id="paCountry"
+              formControlName="city"
+              class="form-control"
+            />
+            <strong
+              class="text-danger"
+              *ngIf="
+                formControls['permanentAddress'].get('city')?.touched &&
+                formControls['currentAddress'].get('city')?.hasError('required')
+              "
+              >city is required field</strong
+            >
+          </div>
+          <div class="form-group">
+            <label for="pincode"><strong>Pincode</strong></label>
+            <input
+              type="text"
+              id="paCountry"
+              formControlName="pincode"
+              class="form-control"
+            />
+            <strong
+              class="text-danger"
+              *ngIf="
+                formControls['permanentAddress'].get('pincode')?.touched &&
+                formControls['currentAddress']
+                  .get('pincode')
+                  ?.hasError('required')
+              "
+              >pincode is required field</strong
+            >
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="isAddSame">
+              <input
+                type="checkbox"
+                id="isAddSame"
+                formControlName="isAddSame"
+                class="mr-2"
+              /><strong>Is Address Same ?</strong>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div formArrayName="skills">
+        <h5><strong>Skills Section</strong></h5>
+        <div
+          class="row"
+          *ngFor="let skill of skillArray.controls; let i = index"
+        >
+          <div class="col-10">
+            <div class="form-group">
+              <input type="text" class="form-control" [formControlName]="i" />
+            </div>
+          </div>
+          <div class="col-2" *ngIf="i > 0">
+            <button
+              class="btn btn-outline btn-danger"
+              type="button"
+              (click)="onSkillRemove(i)"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="onSkillAdd()"
+              [disabled]="formControls['skills'].invalid"
+              *ngIf="skillArray.length < 5; else maxSkillReach"
+            >
+              Add Skill
+            </button>
+            <ng-template #maxSkillReach>
+              <p class="text-success">You Can Add Max Of 5 Skills</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div formArrayName="dependents" class="my-3">
+        <div
+          class="row"
+          *ngFor="let dependent of dependentsArray.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="col">
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="fullName"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="relationship"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="citizenship"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <select
+                formControlName="isTravelingWithYou"
+                class="form-control"
+                id="isTravelingWithYou"
+              >
+                <option [ngValue]="true">yes</option>
+                <option [ngValue]="false">no</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <button
+              type="button"
+              (click)="onDependentRemove(i)"
+              *ngIf="i > 0"
+              class="btn btn-outline-danger"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button
+              type="button"
+              (click)="addDependents()"
+              [disabled]="formControls['dependents'].invalid"
+              class="btn btm-sm btn-info"
+            >
+              Add Dependent
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="password"><strong>Password</strong></label>
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              formControlName="password"
+            />
+            <strong
+              *ngIf="
+                formControls['password'].dirty &&
+                formControls['password'].hasError('pattern')
+              "
+              class="text-danger"
+            >
+              Invalid Password Pattern
+            </strong>
+            <strong
+              *ngIf="
+                formControls['password'].touched &&
+                formControls['password'].hasError('required')
+              "
+              class="text-danger"
+            >
+              Password is required field
+            </strong>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword"
+              ><strong>Confirm Password</strong></label
+            >
+            <input
+              type="password"
+              id="confirmPassword"
+              class="form-control"
+              formControlName="confirmPassword"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="btn">
+        <button type="submit" class="btn btn-info">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
