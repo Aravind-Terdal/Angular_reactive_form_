@@ -9,6 +9,7 @@
           id="username"
           class="form-control"
           formControlName="username"
+          placeholder="JohnDoe"
         />
         <strong
           *ngIf="
@@ -41,6 +42,7 @@
           id="email"
           class="form-control"
           formControlName="email"
+          placeholder="abc@abc.com"
         />
         <strong
           *ngIf="
@@ -67,6 +69,7 @@
           class="form-control"
           id="empID"
           formControlName="empID"
+          placeholder="E123"
         />
         <strong
           *ngIf="
@@ -130,6 +133,7 @@
               id="caCountry"
               formControlName="state"
               class="form-control"
+              placeholder="Karnataka"
             />
             <strong
               class="text-danger"
@@ -149,6 +153,7 @@
               id="caCountry"
               formControlName="city"
               class="form-control"
+              placeholder="Hubli"
             />
             <strong
               class="text-danger"
@@ -166,6 +171,7 @@
               id="caCountry"
               formControlName="pincode"
               class="form-control"
+              placeholder="580030"
             />
             <strong
               class="text-danger"
@@ -204,6 +210,7 @@
               id="paCountry"
               formControlName="state"
               class="form-control"
+              placeholder="Karnataka"
             />
             <strong
               class="text-danger"
@@ -223,6 +230,7 @@
               id="paCountry"
               formControlName="city"
               class="form-control"
+              placeholder="Hubli"
             />
             <strong
               class="text-danger"
@@ -240,6 +248,7 @@
               id="paCountry"
               formControlName="pincode"
               class="form-control"
+              placeholder="580030"
             />
             <strong
               class="text-danger"
@@ -275,7 +284,12 @@
         >
           <div class="col-10">
             <div class="form-group">
-              <input type="text" class="form-control" [formControlName]="i" />
+              <input
+                type="text"
+                class="form-control"
+                [formControlName]="i"
+                placeholder="JS, Angular,"
+              />
             </div>
           </div>
           <div class="col-2" *ngIf="i > 0">
@@ -318,6 +332,7 @@
                 type="text"
                 formControlName="fullName"
                 class="form-control"
+                placeholder="FullName"
               />
             </div>
           </div>
@@ -327,6 +342,7 @@
                 type="text"
                 formControlName="relationship"
                 class="form-control"
+                placeholder="Relationship"
               />
             </div>
           </div>
@@ -336,6 +352,7 @@
                 type="text"
                 formControlName="citizenship"
                 class="form-control"
+                placeholder="Citizenship"
               />
             </div>
           </div>
